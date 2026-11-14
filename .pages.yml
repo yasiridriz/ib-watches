@@ -13,7 +13,7 @@ content:
       - { name: name, label: Model, type: string, required: true }
       - { name: reference, label: Reference number, type: string }
       - { name: price, label: 'Price (text, for example CHF 24,500 or Price on request)', type: string }
-      - { name: source, label: Sourced from, type: select, options: { values: [Lausanne, Istanbul] } }
+      - { name: source, label: Sourced from, type: select, options: { values: [Geneva, Istanbul] } }
       - { name: images, label: 'Pictures (the first picture is the header picture; drag to change the order)', type: image, list: true }
       - { name: description, label: 'Case and dial (for example Steel case, white dial)', type: text }
       - { name: case, label: 'Case (for example Oystersteel, 40 mm)', type: string }
