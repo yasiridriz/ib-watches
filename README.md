@@ -28,6 +28,9 @@ The card on the right of the hero shows one featured watch. In the CMS, switch o
 ## Contact buttons
 The contact section at the bottom of `template.html` has two buttons: e-mail and WhatsApp. Change `hello@ibwatches.com` and the number in `https://wa.me/41000000000` (country code and number, digits only). Every "Enquire" link (hero card and collection) opens a small modal with two buttons: Email and WhatsApp. The modal reads the e-mail address and the WhatsApp number from these two contact buttons, so you change them in one place. Without JavaScript, the link goes to the contact section.
 
+## Cloudflare (Workers Builds)
+`wrangler.jsonc` tells Cloudflare to serve `dist/` as static files. `.node-version` sets the Node version for the build. In Cloudflare, use: build command `node build.mjs`, deploy command `npx wrangler deploy`, and (for PR previews) non-production deploy command `npx wrangler versions upload`. The project name in Cloudflare must be `ib-watches`, as in `wrangler.jsonc`.
+
 ## Host for free
 Use Cloudflare Pages, Netlify or Vercel. Connect the GitHub repository and set:
 - Build command: `node build.mjs`
