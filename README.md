@@ -19,6 +19,8 @@ One-page site. Plain HTML, one small build script, no dependencies.
 
 No CMS? Copy `content/watches/rolex-daytona.json`, change the values, and commit.
 
+Note: Pages CMS can save a new watch as a `.md` file. The content is still JSON. `build.mjs` reads both `.json` and `.md` files in `content/watches/`.
+
 ## Pictures
 Each watch has a list of pictures (`images`) in the CMS. Upload as many as you want. **The first picture is the header picture.** It shows in the hero card and as the large picture in the collection. To change the header picture, drag another picture to the top of the list. In the collection, a watch with more than one picture shows small thumbnails under the large picture. A click on a thumbnail shows that picture large. Old files with a single `image` field still work.
 

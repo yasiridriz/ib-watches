@@ -3,11 +3,16 @@ import { readdirSync, readFileSync, writeFileSync, mkdirSync, cpSync, existsSync
 
 const esc = (s = "") => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const dir = "content/watches";
-const watches = readdirSync(dir).filter(f => f.endsWith(".json"))
-  .map(f => JSON.parse(readFileSync(`${dir}/${f}`, "utf8")));
+// Pages CMS may save a new watch as .md. The content is still JSON, so read both. A broken file is skipped with a warning.
+const watches = readdirSync(dir).filter(f => f.endsWith(".json") || f.endsWith(".md")).sort()
+  .flatMap(f => {
+    try { return [JSON.parse(readFileSync(`${dir}/${f}`, "utf8"))]; }
+    catch (e) { console.warn(`Skipped ${f}: ${e.message}`); return []; }
+  });
 
 // Pictures: the CMS list "images". The first picture is the header picture. The old single "image" field still works.
-const pics = w => Array.isArray(w.images) && w.images.length ? w.images : (w.image ? [w.image] : []);
+const url = p => { try { return encodeURI(decodeURI(p)); } catch { return p; } }; // file names with spaces, for example "WhatsApp Image (1).jpeg"
+const pics = w => (Array.isArray(w.images) && w.images.length ? w.images : (w.image ? [w.image] : [])).map(url);
 const card = w => `
   <article class="card${w.available === false ? " sold" : ""}">
     <div class="photo">${pics(w).length ? `<img src="${esc(pics(w)[0])}" alt="${esc(w.brand)} ${esc(w.name)}" loading="lazy">` : `<span>${esc(w.brand)}</span>`}</div>
