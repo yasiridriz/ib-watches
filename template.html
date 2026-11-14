@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IB Watches · Curated watches from Lausanne and Istanbul</title>
+<meta name="description" content="IB Watches is a small, curated collection of fine watches sourced in Lausanne and Istanbul.">
+<style>
+@font-face{font-family:Sprat;font-weight:500;font-style:normal;font-display:swap;src:url(assets/fonts/Sprat-Medium.woff2) format('woff2')}
+@font-face{font-family:Ronzino;font-weight:400;font-style:normal;font-display:swap;src:url(assets/fonts/Ronzino-Regular.woff2) format('woff2')}
+@font-face{font-family:Ronzino;font-weight:500;font-style:normal;font-display:swap;src:url(assets/fonts/Ronzino-Medium.woff2) format('woff2')}
+:root{--font-text:Ronzino,system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;--bg:#f7f8f6;--fg:#0f3024;--mute:#55655e;--gold:#8f6f2a;--line:#cdd2d0;--card:#eceeed;--green:#0f3024}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font:400 17px/1.6 var(--font-text)}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+nav{position:absolute;inset:0 0 auto 0;z-index:2}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:80px}
+.logo{display:block;font:500 22px Sprat,Georgia,serif;letter-spacing:.2em;text-decoration:none}
+.logo small{display:block;margin-top:5px;font:400 11px var(--font-text);letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+nav a.l{font-size:13px;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;margin-left:28px;color:var(--mute)}
+nav a.l:hover{color:var(--fg)}
+.hero{min-height:100vh;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
+.hero .wrap{flex:1;display:grid;grid-template-columns:1fr 340px;gap:64px;align-items:end;text-align:left;padding-top:120px;padding-bottom:48px;width:100%}
+.latest-card{background:#fff;border:1px solid var(--line);border-top:2px solid var(--gold);padding:12px 12px 26px;box-shadow:0 28px 50px -30px rgba(15,48,36,.35)}
+.lt-photo{aspect-ratio:4/3;background:var(--card);display:grid;place-items:center;color:#9aa5a0;font-size:15px;letter-spacing:.2em;text-transform:uppercase;overflow:hidden}
+.lt-photo img{width:100%;height:100%;object-fit:cover}
+.lt-body{padding:22px 12px 0}
+.lt-body h3{font:500 25px/1.2 var(--font-text);margin:6px 0 0}
+.lt-body .ref{font-size:13px;color:var(--mute);margin-top:4px}
+.lt-body .specs{margin-top:18px}
+.lt-body .specs li{font-size:14px;padding:9px 0}
+.lt-foot{display:flex;justify-content:space-between;align-items:center;margin-top:20px}
+.lt-foot b{font-weight:500;font-size:17px}
+.lt-foot a{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px}
+.lt-foot a:hover{color:var(--fg);border-color:var(--fg)}
+/* multiply: the white of the picture blends into the page color. Colors stay as drawn. */
+.skyline{display:block;width:100%;max-width:64rem;margin:0 auto;height:auto;mix-blend-mode:multiply}
+.eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+h1{font:500 clamp(30px,4.2vw,56px)/1.15 var(--font-text);margin:20px 0 0;max-width:760px}
+.lead{color:var(--mute);max-width:460px}
+.btn{display:inline-block;margin-top:36px;padding:14px 32px;border:1px solid var(--gold);color:var(--fg);text-decoration:none;font-size:13px;letter-spacing:.2em;text-transform:uppercase;transition:.2s}
+.btn:hover{background:var(--green);border-color:var(--green);color:#f7f8f6}
+/* Replace this block with your illustration: put the file in assets/ and set src in the <img> */
+.art{aspect-ratio:1;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--line);font:400 20px var(--font-text);overflow:hidden}
+.art img{width:100%;height:100%;object-fit:cover}
+section{padding:120px 0}
+h2{font:500 clamp(34px,4.5vw,54px)/1.1 var(--font-text);margin:12px 0 20px}
+.specs{list-style:none;padding:0;margin-top:28px;border-top:1px solid var(--line)}
+.specs li{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+.specs span{color:var(--mute)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:28px;margin-top:48px}
+.card .photo{aspect-ratio:1;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;margin-bottom:18px;overflow:hidden;font:400 24px var(--font-text);color:var(--line)}
+.card .photo img{width:100%;height:100%;object-fit:cover}
+.card.sold{opacity:.5}
+.meta{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.card h3{font:500 26px var(--font-text);margin:4px 0}
+.card p{font-size:15px;color:var(--mute)}
+.ref{font-size:13px!important}
+.price{color:var(--fg)!important;margin-top:10px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:64px}
+.cols p{color:var(--mute)}
+.contact{text-align:center;border-top:1px solid var(--line)}
+.contact p{color:var(--mute);max-width:480px;margin:0 auto}
+footer{padding:32px 0;background:var(--green);color:#c9ced0;font-size:13px;text-align:center}
+@media(max-width:800px){.hero .wrap,.peek .wrap,.cols{grid-template-columns:1fr;gap:40px}.art{max-width:320px}section{padding:80px 0}nav a.l{display:none}}
+</style>
+</head>
+<body>
+<nav><div class="wrap"><a class="logo" href="#">IB WATCHES<small>Lausanne · Istanbul</small></a><div><a class="l" href="#collection">Collection</a><a class="l" href="#story">Story</a><a class="l" href="#contact">Contact</a></div></div></nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <h1>A small collection of fine timepieces, sourced by hand in two cities that know time well.</h1>
+      <a class="btn" href="#collection">View the collection</a>
+    </div>
+    <!--FEATURED-->
+  </div>
+  <!-- Hero picture: assets/hero.jpg. Shown in full color. -->
+  <img class="skyline" src="assets/hero.jpg" alt="Illustration of Lausanne and its cathedral" fetchpriority="high">
+</header>
+
+<section id="collection">
+  <div class="wrap">
+    <p class="eyebrow">The collection</p>
+    <h2>Available now</h2>
+    <div class="grid">
+<!--WATCHES-->
+    </div>
+  </div>
+</section>
+
+<section id="story" style="background:var(--card);border-block:1px solid var(--line)">
+  <div class="wrap cols">
+    <div><p class="eyebrow">Our story</p><h2>Two cities, one eye.</h2></div>
+    <div>
+      <p>IB Watches began with a simple idea: find good watches in the places that treasure them. Lausanne gives us Swiss precision and provenance. Istanbul gives us a living market of dealers, collectors and craftspeople.</p>
+      <p style="margin-top:16px">We keep the collection small. We only offer what we would wear ourselves.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <p class="eyebrow">Enquiries</p>
+    <h2>Interested in a piece?</h2>
+    <p>Send us a message. We reply within one day.</p>
+    <!-- Change the e-mail address below -->
+    <a class="btn" href="mailto:hello@ibwatches.com">hello@ibwatches.com</a>
+  </div>
+</section>
+
+<footer>© IB Watches · Lausanne · Istanbul</footer>
+</body>
+</html>

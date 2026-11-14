@@ -1,0 +1,22 @@
+# Pages CMS config (https://pagescms.org). Free. Edits commit to GitHub.
+media:
+  input: assets
+  output: /assets
+content:
+  - name: watches
+    label: Watches
+    type: collection
+    path: content/watches
+    format: json
+    fields:
+      - { name: brand, label: Brand, type: string, required: true }
+      - { name: name, label: Model, type: string, required: true }
+      - { name: reference, label: Reference number, type: string }
+      - { name: price, label: 'Price (text, for example CHF 24,500 or Price on request)', type: string }
+      - { name: source, label: Sourced from, type: select, options: { values: [Lausanne, Istanbul] } }
+      - { name: image, label: Photo, type: image }
+      - { name: description, label: Description, type: text }
+      - { name: case, label: 'Case (for example Oystersteel, 40 mm)', type: string }
+      - { name: movement, label: Movement, type: string }
+      - { name: featured, label: 'Feature as latest arrival (shown below the hero)', type: boolean, default: false }
+      - { name: available, label: Available, type: boolean, default: true }
