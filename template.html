@@ -1,220 +1,807 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>IB Watches · Curated watches from Lausanne and Istanbul</title>
-<meta name="description" content="IB Watches is a small, curated collection of fine watches sourced in Lausanne and Istanbul.">
-<style>
-@font-face{font-family:Sprat;font-weight:500;font-style:normal;font-display:swap;src:url(assets/fonts/Sprat-Medium.woff2) format('woff2')}
-@font-face{font-family:Ronzino;font-weight:400;font-style:normal;font-display:swap;src:url(assets/fonts/Ronzino-Regular.woff2) format('woff2')}
-@font-face{font-family:Ronzino;font-weight:500;font-style:normal;font-display:swap;src:url(assets/fonts/Ronzino-Medium.woff2) format('woff2')}
-:root{--font-text:Ronzino,system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;--bg:#f7f8f6;--fg:#000;--mute:#000;--btn:#0f3024;--gold:#8f6f2a;--line:#cdd2d0;--card:#eceeed;--green:#0f3024}
-*{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--fg);font:400 17px/1.6 var(--font-text)}
-a{color:inherit}
-.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
-nav{position:absolute;inset:0 0 auto 0;z-index:2}
-nav .wrap{display:flex;justify-content:space-between;align-items:center;height:80px}
-.logo{display:block;font:500 22px Sprat,Georgia,serif;letter-spacing:.2em;text-decoration:none}
-.logo small{display:block;margin-top:5px;font:400 11px var(--font-text);letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
-nav a.l{font-size:13px;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;margin-left:28px;color:var(--mute)}
-nav a.l:hover{color:var(--fg)}
-.hero{min-height:100vh;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);position:relative;--pw:max(80vw,100rem)}
-.hero .wrap{position:relative;z-index:1;flex:1;display:grid;grid-template-columns:1fr 340px;gap:64px;align-items:end;text-align:left;max-width:1360px;padding-top:120px;padding-bottom:calc(var(--pw) * .235);width:100%}
-.latest-card{max-width:340px}
-.lt-photo{aspect-ratio:1;background:var(--card);display:grid;place-items:center;color:#9aa5a0;font-size:15px;letter-spacing:.2em;text-transform:uppercase;overflow:hidden}
-.lt-photo img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
-.lt-body{padding:16px 0 0}
-.lt-label{font-size:14px;color:var(--gold)}
-.lt-text{font-size:15px;color:var(--mute);margin-top:8px}
-.lt-body h3{font:500 22px/1.2 var(--font-text);margin:4px 0 0}
-.lt-foot{display:flex;gap:24px;margin-top:14px}
-.lt-foot a{font-size:15px;color:var(--fg);text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line)}
-.lt-foot a:hover{color:var(--gold)}
-/* multiply: the white of the picture blends into the page color. Colors stay as drawn. */
-/* The picture sits at the bottom of the hero and is pushed down by 25% of its height, so the bottom quarter is cut off. The text and the latest arrival sit on its empty sky. */
-.skyline{position:absolute;left:50%;bottom:0;width:var(--pw);max-width:none;height:auto;transform:translate(-50%,25%);mix-blend-mode:multiply;opacity:.45;z-index:0}
-.eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
-h1{font:500 clamp(28px,3.4vw,52px)/1.2 var(--font-text);margin:0;max-width:46rem}
-.lead{color:var(--mute);max-width:460px}
-.btn{display:inline-block;margin-top:36px;padding:14px 32px;background:var(--btn);border:0;color:#f7f8f6;text-decoration:none;font-size:15px;letter-spacing:.02em;transition:filter .2s}
-.btns{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:36px}.btns .btn{margin-top:0}
-.btn:hover{filter:brightness(.85)}
-/* Replace this block with your illustration: put the file in assets/ and set src in the <img> */
-.art{aspect-ratio:1;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--line);font:400 20px var(--font-text);overflow:hidden}
-.art img{width:100%;height:100%;object-fit:cover}
-section{padding:120px 0}
-h2{font:500 clamp(34px,4.5vw,54px)/1.1 var(--font-text);margin:12px 0 20px}
-.specs{list-style:none;padding:0;margin-top:28px;border-top:1px solid var(--line)}
-.specs li{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
-.specs span{color:var(--mute)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:28px;margin-top:48px;align-items:start}
-.card .photo{background:var(--card);border:1px solid var(--line);display:grid;place-items:center;margin-bottom:18px;overflow:hidden;font:400 24px var(--font-text);color:var(--line)}
-.card .photo img{display:block;width:100%;height:auto}
-.card .photo:not(:has(img)){aspect-ratio:1}
-.enquire{display:inline-block;margin-top:12px;font-size:15px;color:var(--fg);text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line)}.enquire:hover{color:var(--gold)}
-dialog{border:1px solid var(--line);background:#fff;color:var(--fg);padding:28px;width:min(340px,calc(100vw - 32px));margin:auto}
-dialog::backdrop{background:rgba(0,0,0,.35)}
-dialog h2{font:500 20px/1.3 var(--font-text);margin:0 0 4px}
-dialog p{font-size:14px;margin:0 0 20px}
-dialog .btn{display:block;text-align:center;margin:0 0 10px}
-dialog .close{display:block;margin:6px auto 0;background:none;border:0;font:inherit;font-size:14px;color:var(--fg);text-decoration:underline;text-underline-offset:4px;cursor:pointer}
-button.photo,button.lt-photo{width:100%;padding:0;border:1px solid var(--line);font:inherit;cursor:pointer}
-button.lt-photo{border:0}
-.title-btn{all:unset;cursor:pointer}.title-btn:hover{color:var(--gold)}.title-btn:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
-#watch{padding:0;border:0;background:var(--bg);color:var(--fg);width:min(1100px,94vw);height:min(86vh,780px);margin:auto;overflow:hidden}
-#watch[open]{display:grid;grid-template-columns:1fr 1fr}
-#watch::backdrop{background:rgba(0,0,0,.45)}
-.wm-gallery{display:flex;flex-direction:column;min-height:0;background:var(--card)}
-.wm-main{flex:1;min-height:0;display:grid;place-items:center;padding:8px}
-.wm-main img{max-width:100%;max-height:100%;object-fit:contain;display:block}
-.wm-thumbs{display:flex;gap:8px;padding:8px;overflow-x:auto;border-top:1px solid var(--line);background:var(--bg)}
-.wm-thumbs button{flex:none;width:68px;height:68px;padding:0;border:1px solid var(--line);background:var(--card);cursor:pointer;opacity:.6}
-.wm-thumbs button.on,.wm-thumbs button:hover{opacity:1;border-color:var(--fg)}
-.wm-thumbs img{width:100%;height:100%;object-fit:contain;display:block}
-.wm-info{padding:48px 40px 40px;display:flex;flex-direction:column;align-items:flex-start;overflow-y:auto}
-.wm-info h2{font:500 clamp(26px,2.6vw,36px)/1.2 var(--font-text);margin:0}
-.wm-info p{margin:16px 0 0;max-width:34ch}
-.wm-info .ref{font-size:14px}
-.wm-info .btn{margin-top:32px}
-.wm-close{position:absolute;top:14px;right:18px;background:none;border:0;font:inherit;font-size:15px;color:var(--fg);text-decoration:underline;text-underline-offset:4px;cursor:pointer;z-index:2}
-body:has(dialog[open]){overflow:hidden}
-@media(max-width:800px){#watch{height:92vh;overflow-y:auto}#watch[open]{display:block}.wm-main{height:56vh;flex:none}.wm-info{padding:28px 24px 36px;overflow:visible}.wm-close{position:fixed;top:calc(4vh + 10px);right:calc(3vw + 14px);background:var(--bg);padding:2px 8px}}
-.card.sold{opacity:.5}
-.meta{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.card h3{font:500 20px/1.3 var(--font-text);margin:4px 0 6px}
-.card p{font-size:15px;color:var(--mute)}
-.ref{font-size:13px!important}
-.price{color:var(--fg)!important;margin-top:10px}
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:64px}
-.cols p{color:var(--mute)}
-.contact{text-align:center;border-top:1px solid var(--line)}
-.contact p{color:var(--mute);max-width:480px;margin:0 auto}
-footer{padding:32px 0;background:var(--green);color:#c9ced0;font-size:13px;text-align:center}
-@media(max-width:800px){.hero .wrap{padding-bottom:40px}.skyline{position:static;transform:none;margin-top:8px;width:100%}.hero .wrap,.peek .wrap,.cols{grid-template-columns:1fr;gap:40px}.art{max-width:320px}section{padding:80px 0}nav a.l{display:none}}
-</style>
-</head>
-<body>
-<nav><div class="wrap"><a class="logo" href="#">IB WATCHES<small>Lausanne · Istanbul</small></a><div><a class="l" href="#collection">Collection</a><a class="l" href="#story">Story</a><a class="l" href="#contact">Contact</a></div></div></nav>
-
-<header class="hero">
-  <div class="wrap">
-    <div>
-      <h1>A small collection of fine timepieces, sourced in two cities that know time well.</h1>
-      <a class="btn" href="#collection">View the collection</a>
-    </div>
-    <!--FEATURED-->
-  </div>
-  <!-- Hero picture: assets/hero.jpg. Shown in full color. -->
-  <img class="skyline" src="assets/hero.jpg" alt="Illustration of Lausanne and its cathedral" fetchpriority="high">
-</header>
-
-<section id="collection">
-  <div class="wrap">
-    <p class="eyebrow">The collection</p>
-    <h2>Available now</h2>
-    <div class="grid">
-<!--WATCHES-->
-    </div>
-  </div>
-</section>
-
-<section id="story" style="background:var(--card);border-block:1px solid var(--line)">
-  <div class="wrap cols">
-    <div><p class="eyebrow">Our story</p><h2>Two cities, one eye.</h2></div>
-    <div>
-      <p>IB Watches began with a simple idea: find good watches in the places that treasure them. Lausanne gives us Swiss precision and provenance. Istanbul gives us a living market of dealers, collectors and craftspeople.</p>
-      <p style="margin-top:16px">We keep the collection small. We only offer what we would wear ourselves.</p>
-    </div>
-  </div>
-</section>
-
-<section id="contact" class="contact">
-  <div class="wrap">
-    <p class="eyebrow">Enquiries</p>
-    <h2>Interested in a piece?</h2>
-    <p>Send us a message. We reply within one day.</p>
-    <!-- Change the e-mail address below -->
-    <div class="btns">
-      <a class="btn" href="mailto:hello@ibwatches.com">hello@ibwatches.com</a>
-      <!-- Change 41000000000 to your WhatsApp number: country code and number, digits only, no + -->
-      <a class="btn" href="https://wa.me/41000000000?text=Hello%20IB%20Watches" target="_blank" rel="noopener">WhatsApp</a>
-    </div>
-  </div>
-</section>
-
-<footer>© IB Watches · Lausanne · Istanbul</footer>
-<dialog id="watch" aria-labelledby="wm-title">
-  <button type="button" class="wm-close">Close</button>
-  <div class="wm-gallery"><div class="wm-main"><img id="wm-big" alt=""></div><div class="wm-thumbs" id="wm-thumbs"></div></div>
-  <div class="wm-info">
-    <h2 id="wm-title"></h2>
-    <p id="wm-desc"></p>
-    <p class="ref" id="wm-ref"></p>
-    <a class="btn" id="wm-enquire" href="#contact">Enquire</a>
-  </div>
-</dialog>
-<!--WATCHDATA-->
-<dialog id="enquire" aria-labelledby="enquire-title">
-  <h2 id="enquire-title">Enquire</h2>
-  <p id="enquire-watch"></p>
-  <a class="btn" id="enquire-email" href="#">Email</a>
-  <a class="btn" id="enquire-wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
-  <button type="button" class="close">Close</button>
-</dialog>
-<script>
-// Enquire modal. The e-mail address and the WhatsApp number come from the buttons in the contact section.
-(function(){
-  var dlg=document.getElementById("enquire");
-  if(!dlg||typeof dlg.showModal!=="function")return; // without a modal, the link goes to the contact section
-  var mail=document.querySelector('#contact a[href^="mailto:"]'),wa=document.querySelector('#contact a[href*="wa.me"]');
-  document.addEventListener("click",function(e){
-    var a=e.target.closest("[data-enquire]");
-    if(!a)return;
-    e.preventDefault();
-    var w=a.dataset.enquire;
-    document.getElementById("enquire-watch").textContent=w;
-    document.getElementById("enquire-email").href=mail?mail.getAttribute("href").split("?")[0]+"?subject="+encodeURIComponent("Enquiry: "+w):"#contact";
-    document.getElementById("enquire-wa").href=wa?wa.getAttribute("href").split("?")[0]+"?text="+encodeURIComponent("Hello IB Watches, I am interested in the "+w+"."):"#contact";
-    dlg.showModal();
-  });
-  dlg.addEventListener("click",function(e){if(e.target===dlg||e.target.classList.contains("close"))dlg.close();});
-})();
-</script>
-<script>
-// Watch modal: one large picture and a row of small pictures on the left half. Details on the right half.
-(function(){
-  var dlg=document.getElementById("watch"),data=document.getElementById("watch-data");
-  if(!dlg||!data||typeof dlg.showModal!=="function")return;
-  var list=JSON.parse(data.textContent);
-  document.addEventListener("click",function(e){
-    var o=e.target.closest("[data-open]");
-    if(o){
-      var w=list[+o.dataset.open];if(!w)return;
-      var name=w.brand+" "+w.name,big=document.getElementById("wm-big"),strip=document.getElementById("wm-thumbs");
-      strip.textContent="";
-      big.alt=name;big.src=w.images[0]||"";big.hidden=!w.images.length;
-      strip.hidden=w.images.length<2;
-      w.images.forEach(function(src,n){
-        var b=document.createElement("button"),im=document.createElement("img");
-        b.type="button";b.setAttribute("aria-label","Show picture "+(n+1));if(!n)b.className="on";
-        im.src=src;im.alt="";b.appendChild(im);
-        b.addEventListener("click",function(){big.src=src;strip.querySelectorAll("button").forEach(function(x){x.classList.remove("on");});b.classList.add("on");});
-        strip.appendChild(b);
-      });
-      document.getElementById("wm-title").textContent=name;
-      document.getElementById("wm-desc").textContent=w.description||"";
-      document.getElementById("wm-ref").textContent=w.reference?"Ref. "+w.reference:"";
-      var en=document.getElementById("wm-enquire");
-      en.hidden=!!w.sold;en.dataset.enquire=name;
-      dlg.showModal();dlg.scrollTop=0;
-      return;
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IB Watches · Curated watches from Lausanne and Istanbul</title>
+  <meta name="description"
+    content="IB Watches is a small, curated collection of fine watches sourced in Lausanne and Istanbul.">
+  <style>
+    @font-face {
+      font-family: Sprat;
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+      src: url(assets/fonts/Sprat-Medium.woff2) format('woff2')
     }
-    if(e.target===dlg||e.target.classList.contains("wm-close"))dlg.close();
-  });
-})();
-</script>
+
+    @font-face {
+      font-family: Ronzino;
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+      src: url(assets/fonts/Ronzino-Regular.woff2) format('woff2')
+    }
+
+    @font-face {
+      font-family: Ronzino;
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+      src: url(assets/fonts/Ronzino-Medium.woff2) format('woff2')
+    }
+
+    :root {
+      --font-text: Ronzino, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+      --bg: #f7f8f6;
+      --fg: #000;
+      --mute: #000;
+      --btn: #0f3024;
+      --gold: #8f6f2a;
+      --line: #cdd2d0;
+      --card: #eceeed;
+      --green: #0f3024
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font: 400 17px/1.6 var(--font-text)
+    }
+
+    a {
+      color: inherit
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px
+    }
+
+    nav {
+      position: absolute;
+      inset: 0 0 auto 0;
+      z-index: 2
+    }
+
+    nav .wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px
+    }
+
+    .logo {
+      display: block;
+      font: 500 22px Sprat, Georgia, serif;
+      letter-spacing: .2em;
+      text-decoration: none
+    }
+
+    .logo small {
+      display: block;
+      margin-top: 5px;
+      font: 400 11px var(--font-text);
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--gold)
+    }
+
+    nav a.l {
+      font-size: 13px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      margin-left: 28px;
+      color: var(--mute)
+    }
+
+    nav a.l:hover {
+      color: var(--fg)
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--bg);
+      position: relative;
+      --pw: max(80vw, 100rem)
+    }
+
+    .hero .wrap {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 64px;
+      align-items: center;
+      align-content: end;
+      text-align: left;
+      max-width: 1120px;
+      padding-top: 120px;
+      padding-bottom: calc(var(--pw) * .235);
+      width: 100%
+    }
+
+    .latest-card {
+      max-width: 300px
+    }
+
+    .lt-photo {
+      aspect-ratio: 3/4;
+      background: var(--card);
+      display: grid;
+      place-items: center;
+      color: #9aa5a0;
+      font-size: 15px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      overflow: hidden
+    }
+
+    .lt-photo {
+      position: relative
+    }
+
+    .lt-photo img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      mix-blend-mode: multiply
+    }
+
+    .lt-body {
+      padding: 16px 0 0
+    }
+
+    .lt-label {
+      font-size: 14px;
+      color: var(--gold)
+    }
+
+    .lt-text {
+      font-size: 15px;
+      color: var(--mute);
+      margin-top: 8px
+    }
+
+    .lt-body h3 {
+      font: 500 22px/1.2 var(--font-text);
+      margin: 4px 0 0
+    }
+
+    .lt-foot {
+      display: flex;
+      gap: 24px;
+      margin-top: 14px
+    }
+
+    .lt-foot a {
+      font-size: 15px;
+      color: var(--fg);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-color: var(--line)
+    }
+
+    .lt-foot a:hover {
+      color: var(--gold)
+    }
+
+    /* multiply: the white of the picture blends into the page color. Colors stay as drawn. */
+    /* The picture sits at the bottom of the hero and is pushed down by 25% of its height, so the bottom quarter is cut off. The text and the latest arrival sit on its empty sky. */
+    .skyline {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: var(--pw);
+      max-width: none;
+      height: auto;
+      transform: translate(-50%, 25%);
+      mix-blend-mode: multiply;
+      opacity: .45;
+      z-index: 0
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--gold)
+    }
+
+    h1 {
+      font: 500 clamp(24px, 2.5vw, 38px)/1.25 var(--font-text);
+      margin: 0;
+      max-width: 46rem
+    }
+
+    .lead {
+      color: var(--mute);
+      max-width: 460px
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 36px;
+      padding: 14px 32px;
+      background: var(--btn);
+      border: 0;
+      color: #f7f8f6;
+      text-decoration: none;
+      font-size: 15px;
+      letter-spacing: .02em;
+      transition: filter .2s
+    }
+
+    .btns {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 36px
+    }
+
+    .btns .btn {
+      margin-top: 0
+    }
+
+    .btn:hover {
+      filter: brightness(.85)
+    }
+
+    /* Replace this block with your illustration: put the file in assets/ and set src in the <img> */
+    .art {
+      aspect-ratio: 1;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--line);
+      font: 400 20px var(--font-text);
+      overflow: hidden
+    }
+
+    .art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover
+    }
+
+    section {
+      padding: 120px 0
+    }
+
+    h2 {
+      font: 500 clamp(34px, 4.5vw, 54px)/1.1 var(--font-text);
+      margin: 12px 0 20px
+    }
+
+    .specs {
+      list-style: none;
+      padding: 0;
+      margin-top: 28px;
+      border-top: 1px solid var(--line)
+    }
+
+    .specs li {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 15px
+    }
+
+    .specs span {
+      color: var(--mute)
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 28px;
+      margin-top: 48px;
+      align-items: start
+    }
+
+    .card .photo {
+      aspect-ratio: 3/4;
+      background: var(--card);
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      overflow: hidden;
+      font: 400 24px var(--font-text);
+      color: var(--line)
+    }
+
+    .card .photo {
+      position: relative
+    }
+
+    .card .photo img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center
+    }
+
+    .enquire {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 15px;
+      color: var(--fg);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-color: var(--line)
+    }
+
+    .enquire:hover {
+      color: var(--gold)
+    }
+
+    dialog {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--fg);
+      padding: 28px;
+      width: min(340px, calc(100vw - 32px));
+      margin: auto
+    }
+
+    dialog::backdrop {
+      background: rgba(0, 0, 0, .35)
+    }
+
+    dialog h2 {
+      font: 500 20px/1.3 var(--font-text);
+      margin: 0 0 4px
+    }
+
+    dialog p {
+      font-size: 14px;
+      margin: 0 0 20px
+    }
+
+    dialog .btn {
+      display: block;
+      text-align: center;
+      margin: 0 0 10px
+    }
+
+    dialog .close {
+      display: block;
+      margin: 6px auto 0;
+      background: none;
+      border: 0;
+      font: inherit;
+      font-size: 14px;
+      color: var(--fg);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      cursor: pointer
+    }
+
+    button.photo,
+    button.lt-photo {
+      width: 100%;
+      padding: 0;
+      border: 1px solid var(--line);
+      font: inherit;
+      cursor: pointer
+    }
+
+    button.lt-photo {
+      border: 0
+    }
+
+    .title-btn {
+      all: unset;
+      cursor: pointer
+    }
+
+    .title-btn:hover {
+      color: var(--gold)
+    }
+
+    .title-btn:focus-visible {
+      outline: 2px solid var(--fg);
+      outline-offset: 3px
+    }
+
+    #watch {
+      padding: 0;
+      border: 0;
+      background: var(--bg);
+      color: var(--fg);
+      width: min(1100px, 94vw);
+      height: min(86vh, 780px);
+      margin: auto;
+      overflow: hidden
+    }
+
+    #watch[open] {
+      display: grid;
+      grid-template-columns: 1fr 1fr
+    }
+
+    #watch::backdrop {
+      background: rgba(0, 0, 0, .45)
+    }
+
+    .wm-gallery {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      background: var(--card)
+    }
+
+    .wm-main {
+      flex: 1;
+      min-height: 0;
+      position: relative
+    }
+
+    .wm-main img {
+      position: absolute;
+      inset: 8px;
+      width: calc(100% - 16px);
+      height: calc(100% - 16px);
+      object-fit: contain;
+      object-position: center
+    }
+
+    .wm-thumbs {
+      display: flex;
+      gap: 8px;
+      padding: 8px;
+      overflow-x: auto;
+      border-top: 1px solid var(--line);
+      background: var(--bg)
+    }
+
+    .wm-thumbs button {
+      flex: none;
+      width: 68px;
+      height: 68px;
+      padding: 0;
+      border: 1px solid var(--line);
+      background: var(--card);
+      cursor: pointer;
+      opacity: .6
+    }
+
+    .wm-thumbs button.on,
+    .wm-thumbs button:hover {
+      opacity: 1;
+      border-color: var(--fg)
+    }
+
+    .wm-thumbs img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block
+    }
+
+    .wm-info {
+      padding: 48px 40px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      overflow-y: auto
+    }
+
+    .wm-info h2 {
+      font: 500 clamp(26px, 2.6vw, 36px)/1.2 var(--font-text);
+      margin: 0
+    }
+
+    .wm-info p {
+      margin: 16px 0 0;
+      max-width: 34ch
+    }
+
+    .wm-info .ref {
+      font-size: 14px
+    }
+
+    .wm-info .btn {
+      margin-top: 32px
+    }
+
+    .wm-close {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      background: none;
+      border: 0;
+      font: inherit;
+      font-size: 15px;
+      color: var(--fg);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      cursor: pointer;
+      z-index: 2
+    }
+
+    body:has(dialog[open]) {
+      overflow: hidden
+    }
+
+    @media(max-width:800px) {
+      #watch {
+        height: 92vh;
+        overflow-y: auto
+      }
+
+      #watch[open] {
+        display: block
+      }
+
+      .wm-main {
+        height: 56vh;
+        flex: none
+      }
+
+      .wm-info {
+        padding: 28px 24px 36px;
+        overflow: visible
+      }
+
+      .wm-close {
+        position: fixed;
+        top: calc(4vh + 10px);
+        right: calc(3vw + 14px);
+        background: var(--bg);
+        padding: 2px 8px
+      }
+    }
+
+    .card.sold {
+      opacity: .5
+    }
+
+    .meta {
+      font-size: 12px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold)
+    }
+
+    .card h3 {
+      font: 500 20px/1.3 var(--font-text);
+      margin: 4px 0 6px
+    }
+
+    .card p {
+      font-size: 15px;
+      color: var(--mute)
+    }
+
+    .ref {
+      font-size: 13px !important
+    }
+
+    .price {
+      color: var(--fg) !important;
+      margin-top: 10px
+    }
+
+    .cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px
+    }
+
+    .cols p {
+      color: var(--mute)
+    }
+
+    .contact {
+      text-align: center;
+      border-top: 1px solid var(--line)
+    }
+
+    .contact p {
+      color: var(--mute);
+      max-width: 480px;
+      margin: 0 auto
+    }
+
+    footer {
+      padding: 32px 0;
+      background: var(--green);
+      color: #c9ced0;
+      font-size: 13px;
+      text-align: center
+    }
+
+    @media(max-width:800px) {
+      .hero .wrap {
+        padding-bottom: 40px
+      }
+
+      .skyline {
+        position: static;
+        transform: none;
+        margin-top: 8px;
+        width: 100%
+      }
+
+      .hero .wrap,
+      .peek .wrap,
+      .cols {
+        grid-template-columns: 1fr;
+        gap: 40px
+      }
+
+      .art {
+        max-width: 320px
+      }
+
+      section {
+        padding: 80px 0
+      }
+
+      nav a.l {
+        display: none
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="wrap"><a class="logo" href="#">IB WATCHES</a>
+      <div><a class="l" href="#collection">Collection</a><a class="l" href="#story">Story</a><a class="l"
+          href="#contact">Contact</a></div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <div>
+        <h1>A small collection of fine timepieces, sourced in Lausanne and Istanbul.</h1>
+        <a class="btn" href="#collection">View the collection</a>
+      </div>
+      <!--FEATURED-->
+    </div>
+    <!-- Hero picture: assets/hero.jpg. Shown in full color. -->
+    <img class="skyline" src="assets/hero.jpg" alt="Illustration of Lausanne and its cathedral" fetchpriority="high">
+  </header>
+
+  <section id="collection">
+    <div class="wrap">
+      <p class="eyebrow">The collection</p>
+      <h2>Available now</h2>
+      <div class="grid">
+        <!--WATCHES-->
+      </div>
+    </div>
+  </section>
+
+  <section id="story" style="background:var(--card);border-block:1px solid var(--line)">
+    <div class="wrap cols">
+      <div>
+        <h2>Two cities, one eye.</h2>
+      </div>
+      <div>
+        <p>IB Watches began with a simple idea: find good watches in the places that treasure them. Lausanne gives us
+          Swiss precision and provenance. Istanbul gives us a living market of dealers, collectors and craftspeople.</p>
+        <p style="margin-top:16px">We keep the collection small. We only offer what we would wear ourselves.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>Interested in a piece?</h2>
+      <p>Send us a message. We reply within one day.</p>
+      <!-- Change the e-mail address below -->
+      <div class="btns">
+        <a class="btn" href="mailto:hello@ibwatches.com">hello@ibwatches.com</a>
+        <!-- Change 41000000000 to your WhatsApp number: country code and number, digits only, no + -->
+        <a class="btn" href="https://wa.me/41000000000?text=Hello%20IB%20Watches" target="_blank"
+          rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>© IB Watches</footer>
+  <dialog id="watch" aria-labelledby="wm-title">
+    <button type="button" class="wm-close">Close</button>
+    <div class="wm-gallery">
+      <div class="wm-main"><img id="wm-big" alt=""></div>
+      <div class="wm-thumbs" id="wm-thumbs"></div>
+    </div>
+    <div class="wm-info">
+      <h2 id="wm-title"></h2>
+      <p id="wm-desc"></p>
+      <p class="ref" id="wm-ref"></p>
+      <a class="btn" id="wm-enquire" href="#contact">Enquire</a>
+    </div>
+  </dialog>
+  <!--WATCHDATA-->
+  <dialog id="enquire" aria-labelledby="enquire-title">
+    <h2 id="enquire-title">Enquire</h2>
+    <p id="enquire-watch"></p>
+    <a class="btn" id="enquire-email" href="#">Email</a>
+    <a class="btn" id="enquire-wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+    <button type="button" class="close">Close</button>
+  </dialog>
+  <script>
+    // Enquire modal. The e-mail address and the WhatsApp number come from the buttons in the contact section.
+    (function () {
+      var dlg = document.getElementById("enquire");
+      if (!dlg || typeof dlg.showModal !== "function") return; // without a modal, the link goes to the contact section
+      var mail = document.querySelector('#contact a[href^="mailto:"]'), wa = document.querySelector('#contact a[href*="wa.me"]');
+      document.addEventListener("click", function (e) {
+        var a = e.target.closest("[data-enquire]");
+        if (!a) return;
+        e.preventDefault();
+        var w = a.dataset.enquire;
+        document.getElementById("enquire-watch").textContent = w;
+        document.getElementById("enquire-email").href = mail ? mail.getAttribute("href").split("?")[0] + "?subject=" + encodeURIComponent("Enquiry: " + w) : "#contact";
+        document.getElementById("enquire-wa").href = wa ? wa.getAttribute("href").split("?")[0] + "?text=" + encodeURIComponent("Hello IB Watches, I am interested in the " + w + ".") : "#contact";
+        dlg.showModal();
+      });
+      dlg.addEventListener("click", function (e) { if (e.target === dlg || e.target.classList.contains("close")) dlg.close(); });
+    })();
+  </script>
+  <script>
+    // Watch modal: one large picture and a row of small pictures on the left half. Details on the right half.
+    (function () {
+      var dlg = document.getElementById("watch"), data = document.getElementById("watch-data");
+      if (!dlg || !data || typeof dlg.showModal !== "function") return;
+      var list = JSON.parse(data.textContent);
+      document.addEventListener("click", function (e) {
+        var o = e.target.closest("[data-open]");
+        if (o) {
+          var w = list[+o.dataset.open]; if (!w) return;
+          var name = w.brand + " " + w.name, big = document.getElementById("wm-big"), strip = document.getElementById("wm-thumbs");
+          strip.textContent = "";
+          big.alt = name; big.src = w.images[0] || ""; big.hidden = !w.images.length;
+          strip.hidden = w.images.length < 2;
+          w.images.forEach(function (src, n) {
+            var b = document.createElement("button"), im = document.createElement("img");
+            b.type = "button"; b.setAttribute("aria-label", "Show picture " + (n + 1)); if (!n) b.className = "on";
+            im.src = src; im.alt = ""; b.appendChild(im);
+            b.addEventListener("click", function () { big.src = src; strip.querySelectorAll("button").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on"); });
+            strip.appendChild(b);
+          });
+          document.getElementById("wm-title").textContent = name;
+          document.getElementById("wm-desc").textContent = w.description || "";
+          document.getElementById("wm-ref").textContent = w.reference ? "Ref. " + w.reference : "";
+          var en = document.getElementById("wm-enquire");
+          en.hidden = !!w.sold; en.dataset.enquire = name;
+          dlg.showModal(); dlg.scrollTop = 0;
+          return;
+        }
+        if (e.target === dlg || e.target.classList.contains("wm-close")) dlg.close();
+      });
+    })();
+  </script>
 </body>
+
 </html>
