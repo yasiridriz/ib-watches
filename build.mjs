@@ -6,30 +6,28 @@ const dir = "content/watches";
 const watches = readdirSync(dir).filter(f => f.endsWith(".json"))
   .map(f => JSON.parse(readFileSync(`${dir}/${f}`, "utf8")));
 
+// Pictures: the CMS list "images". The first picture is the header picture. The old single "image" field still works.
+const pics = w => Array.isArray(w.images) && w.images.length ? w.images : (w.image ? [w.image] : []);
 const card = w => `
   <article class="card${w.available === false ? " sold" : ""}">
-    <div class="photo">${w.image ? `<img src="${esc(w.image)}" alt="${esc(w.brand)} ${esc(w.name)}" loading="lazy">` : `<span>${esc(w.brand)}</span>`}</div>
-    <p class="meta">${esc(w.brand)}${w.source ? ` · ${esc(w.source)}` : ""}</p>
-    <h3>${esc(w.name)}</h3>
-    ${w.reference ? `<p class="ref">Ref. ${esc(w.reference)}</p>` : ""}
+    <div class="photo">${pics(w).length ? `<img src="${esc(pics(w)[0])}" alt="${esc(w.brand)} ${esc(w.name)}" loading="lazy">` : `<span>${esc(w.brand)}</span>`}</div>
+    ${pics(w).length > 1 ? `<div class="thumbs">${pics(w).map(p => `<button type="button" data-src="${esc(p)}" aria-label="Show picture"><img src="${esc(p)}" alt="" loading="lazy"></button>`).join("")}</div>` : ""}
+    <h3>${esc(w.brand)} ${esc(w.name)}</h3>
     <p>${esc(w.description)}</p>
-    <p class="price">${w.available === false ? "Sold" : esc(w.price)}</p>
+    ${w.available === false ? `<p class="price">Sold</p>` : `<a class="enquire" href="#contact" data-enquire="${esc(w.brand)} ${esc(w.name)}">Enquire</a>`}
   </article>`;
 
 // Featured watch: the first one with "featured" switched on. If none, the first available watch.
 const live = watches.filter(w => w.available !== false);
 const feat = live.find(w => w.featured) || live[0];
 const template = readFileSync("template.html", "utf8");
-const email = (template.match(/mailto:([^"?]+)/) || [, ""])[1];
-const row = (k, v) => v ? `<li><span>${k}</span>${esc(v)}</li>` : "";
 const featured = !feat ? "" : `<aside class="latest-card" aria-label="Latest arrival">
-      <div class="lt-photo">${feat.image ? `<img src="${esc(feat.image)}" alt="${esc(feat.brand)} ${esc(feat.name)}">` : esc(feat.brand)}</div>
+      <div class="lt-photo">${pics(feat).length ? `<img src="${esc(pics(feat)[0])}" alt="${esc(feat.brand)} ${esc(feat.name)}">` : esc(feat.brand)}</div>
       <div class="lt-body">
-        <p class="eyebrow">Latest arrival</p>
+        <p class="lt-label">Latest arrival</p>
         <h3>${esc(feat.brand)} ${esc(feat.name)}</h3>
-        ${feat.reference ? `<p class="ref">Ref. ${esc(feat.reference)}</p>` : ""}
-        <ul class="specs">${row("Case", feat.case)}${row("Movement", feat.movement)}${row("Sourced from", feat.source)}</ul>
-        <div class="lt-foot"><b>${esc(feat.price)}</b><a href="mailto:${esc(email)}?subject=${encodeURIComponent("Enquiry: " + feat.brand + " " + feat.name)}">Enquire</a></div>
+        ${feat.description ? `<p class="lt-text">${esc(feat.description)}</p>` : ""}
+        <div class="lt-foot"><a href="#contact" data-enquire="${esc(feat.brand)} ${esc(feat.name)}">Enquire</a><a href="#collection">See all</a></div>
       </div>
     </aside>`;
 const html = template.replace("<!--WATCHES-->", watches.map(card).join("\n")).replace("<!--FEATURED-->", featured);

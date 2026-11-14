@@ -9,7 +9,7 @@
 @font-face{font-family:Sprat;font-weight:500;font-style:normal;font-display:swap;src:url(assets/fonts/Sprat-Medium.woff2) format('woff2')}
 @font-face{font-family:Ronzino;font-weight:400;font-style:normal;font-display:swap;src:url(assets/fonts/Ronzino-Regular.woff2) format('woff2')}
 @font-face{font-family:Ronzino;font-weight:500;font-style:normal;font-display:swap;src:url(assets/fonts/Ronzino-Medium.woff2) format('woff2')}
-:root{--font-text:Ronzino,system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;--bg:#f7f8f6;--fg:#0f3024;--mute:#55655e;--gold:#8f6f2a;--line:#cdd2d0;--card:#eceeed;--green:#0f3024}
+:root{--font-text:Ronzino,system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;--bg:#f7f8f6;--fg:#000;--mute:#000;--btn:#0f3024;--gold:#8f6f2a;--line:#cdd2d0;--card:#eceeed;--green:#0f3024}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--fg);font:400 17px/1.6 var(--font-text)}
@@ -21,27 +21,27 @@ nav .wrap{display:flex;justify-content:space-between;align-items:center;height:8
 .logo small{display:block;margin-top:5px;font:400 11px var(--font-text);letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
 nav a.l{font-size:13px;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;margin-left:28px;color:var(--mute)}
 nav a.l:hover{color:var(--fg)}
-.hero{min-height:100vh;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
-.hero .wrap{flex:1;display:grid;grid-template-columns:1fr 340px;gap:64px;align-items:end;text-align:left;padding-top:120px;padding-bottom:48px;width:100%}
-.latest-card{background:#fff;border:1px solid var(--line);border-top:2px solid var(--gold);padding:12px 12px 26px;box-shadow:0 28px 50px -30px rgba(15,48,36,.35)}
-.lt-photo{aspect-ratio:4/3;background:var(--card);display:grid;place-items:center;color:#9aa5a0;font-size:15px;letter-spacing:.2em;text-transform:uppercase;overflow:hidden}
-.lt-photo img{width:100%;height:100%;object-fit:cover}
-.lt-body{padding:22px 12px 0}
-.lt-body h3{font:500 25px/1.2 var(--font-text);margin:6px 0 0}
-.lt-body .ref{font-size:13px;color:var(--mute);margin-top:4px}
-.lt-body .specs{margin-top:18px}
-.lt-body .specs li{font-size:14px;padding:9px 0}
-.lt-foot{display:flex;justify-content:space-between;align-items:center;margin-top:20px}
-.lt-foot b{font-weight:500;font-size:17px}
-.lt-foot a{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:2px}
-.lt-foot a:hover{color:var(--fg);border-color:var(--fg)}
+.hero{min-height:100vh;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);position:relative;--pw:max(80vw,100rem)}
+.hero .wrap{position:relative;z-index:1;flex:1;display:grid;grid-template-columns:1fr 240px;gap:64px;align-items:end;text-align:left;max-width:1360px;padding-top:120px;padding-bottom:calc(var(--pw) * .235);width:100%}
+.latest-card{max-width:240px}
+.lt-photo{aspect-ratio:1;background:var(--card);display:grid;place-items:center;color:#9aa5a0;font-size:15px;letter-spacing:.2em;text-transform:uppercase;overflow:hidden}
+.lt-photo img{width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply}
+.lt-body{padding:16px 0 0}
+.lt-label{font-size:14px;color:var(--gold)}
+.lt-text{font-size:15px;color:var(--mute);margin-top:8px}
+.lt-body h3{font:500 22px/1.2 var(--font-text);margin:4px 0 0}
+.lt-foot{display:flex;gap:24px;margin-top:14px}
+.lt-foot a{font-size:15px;color:var(--fg);text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line)}
+.lt-foot a:hover{color:var(--gold)}
 /* multiply: the white of the picture blends into the page color. Colors stay as drawn. */
-.skyline{display:block;width:100%;max-width:64rem;margin:0 auto;height:auto;mix-blend-mode:multiply}
+/* The picture sits at the bottom of the hero and is pushed down by 25% of its height, so the bottom quarter is cut off. The text and the latest arrival sit on its empty sky. */
+.skyline{position:absolute;left:50%;bottom:0;width:var(--pw);max-width:none;height:auto;transform:translate(-50%,25%);mix-blend-mode:multiply;opacity:.45;z-index:0}
 .eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
-h1{font:500 clamp(30px,4.2vw,56px)/1.15 var(--font-text);margin:20px 0 0;max-width:760px}
+h1{font:500 clamp(28px,3.4vw,52px)/1.2 var(--font-text);margin:0;max-width:46rem}
 .lead{color:var(--mute);max-width:460px}
-.btn{display:inline-block;margin-top:36px;padding:14px 32px;border:1px solid var(--gold);color:var(--fg);text-decoration:none;font-size:13px;letter-spacing:.2em;text-transform:uppercase;transition:.2s}
-.btn:hover{background:var(--green);border-color:var(--green);color:#f7f8f6}
+.btn{display:inline-block;margin-top:36px;padding:14px 32px;background:var(--btn);border:0;color:#f7f8f6;text-decoration:none;font-size:15px;letter-spacing:.02em;transition:filter .2s}
+.btns{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:36px}.btns .btn{margin-top:0}
+.btn:hover{filter:brightness(.85)}
 /* Replace this block with your illustration: put the file in assets/ and set src in the <img> */
 .art{aspect-ratio:1;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--line);font:400 20px var(--font-text);overflow:hidden}
 .art img{width:100%;height:100%;object-fit:cover}
@@ -53,9 +53,17 @@ h2{font:500 clamp(34px,4.5vw,54px)/1.1 var(--font-text);margin:12px 0 20px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:28px;margin-top:48px}
 .card .photo{aspect-ratio:1;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;margin-bottom:18px;overflow:hidden;font:400 24px var(--font-text);color:var(--line)}
 .card .photo img{width:100%;height:100%;object-fit:cover}
+.thumbs{display:flex;gap:8px;margin:-6px 0 14px}.thumbs button{width:48px;height:48px;padding:0;border:1px solid var(--line);background:var(--card);cursor:pointer}.thumbs button:hover{border-color:var(--fg)}.thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.enquire{display:inline-block;margin-top:12px;font-size:15px;color:var(--fg);text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line)}.enquire:hover{color:var(--gold)}
+dialog{border:1px solid var(--line);background:#fff;color:var(--fg);padding:28px;width:min(340px,calc(100vw - 32px));margin:auto}
+dialog::backdrop{background:rgba(0,0,0,.35)}
+dialog h2{font:500 20px/1.3 var(--font-text);margin:0 0 4px}
+dialog p{font-size:14px;margin:0 0 20px}
+dialog .btn{display:block;text-align:center;margin:0 0 10px}
+dialog .close{display:block;margin:6px auto 0;background:none;border:0;font:inherit;font-size:14px;color:var(--fg);text-decoration:underline;text-underline-offset:4px;cursor:pointer}
 .card.sold{opacity:.5}
 .meta{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.card h3{font:500 26px var(--font-text);margin:4px 0}
+.card h3{font:500 20px/1.3 var(--font-text);margin:4px 0 6px}
 .card p{font-size:15px;color:var(--mute)}
 .ref{font-size:13px!important}
 .price{color:var(--fg)!important;margin-top:10px}
@@ -64,7 +72,7 @@ h2{font:500 clamp(34px,4.5vw,54px)/1.1 var(--font-text);margin:12px 0 20px}
 .contact{text-align:center;border-top:1px solid var(--line)}
 .contact p{color:var(--mute);max-width:480px;margin:0 auto}
 footer{padding:32px 0;background:var(--green);color:#c9ced0;font-size:13px;text-align:center}
-@media(max-width:800px){.hero .wrap,.peek .wrap,.cols{grid-template-columns:1fr;gap:40px}.art{max-width:320px}section{padding:80px 0}nav a.l{display:none}}
+@media(max-width:800px){.hero .wrap{padding-bottom:40px}.skyline{position:static;transform:none;margin-top:8px;width:100%}.hero .wrap,.peek .wrap,.cols{grid-template-columns:1fr;gap:40px}.art{max-width:320px}section{padding:80px 0}nav a.l{display:none}}
 </style>
 </head>
 <body>
@@ -79,11 +87,10 @@ footer{padding:32px 0;background:var(--green);color:#c9ced0;font-size:13px;text-
     <aside class="latest-card" aria-label="Latest arrival">
       <div class="lt-photo">Rolex</div>
       <div class="lt-body">
-        <p class="eyebrow">Latest arrival</p>
+        <p class="lt-label">Latest arrival</p>
         <h3>Rolex Cosmograph Daytona</h3>
-        <p class="ref">Ref. 116500LN</p>
-        <ul class="specs"><li><span>Case</span>Oystersteel, 40 mm</li><li><span>Movement</span>Calibre 4130, automatic</li><li><span>Sourced from</span>Lausanne</li></ul>
-        <div class="lt-foot"><b>Price on request</b><a href="mailto:hello@ibwatches.com?subject=Enquiry%3A%20Rolex%20Cosmograph%20Daytona">Enquire</a></div>
+        <p class="lt-text">Steel case, white dial, black Cerachrom bezel. Full set.</p>
+        <div class="lt-foot"><a href="#contact" data-enquire="Rolex Cosmograph Daytona">Enquire</a><a href="#collection">See all</a></div>
       </div>
     </aside>
   </div>
@@ -99,11 +106,10 @@ footer{padding:32px 0;background:var(--green);color:#c9ced0;font-size:13px;text-
 
   <article class="card">
     <div class="photo"><span>Rolex</span></div>
-    <p class="meta">Rolex · Lausanne</p>
-    <h3>Cosmograph Daytona</h3>
-    <p class="ref">Ref. 116500LN</p>
+    
+    <h3>Rolex Cosmograph Daytona</h3>
     <p>Steel case, white dial, black Cerachrom bezel. Full set.</p>
-    <p class="price">Price on request</p>
+    <a class="enquire" href="#contact" data-enquire="Rolex Cosmograph Daytona">Enquire</a>
   </article>
     </div>
   </div>
@@ -125,10 +131,49 @@ footer{padding:32px 0;background:var(--green);color:#c9ced0;font-size:13px;text-
     <h2>Interested in a piece?</h2>
     <p>Send us a message. We reply within one day.</p>
     <!-- Change the e-mail address below -->
-    <a class="btn" href="mailto:hello@ibwatches.com">hello@ibwatches.com</a>
+    <div class="btns">
+      <a class="btn" href="mailto:hello@ibwatches.com">hello@ibwatches.com</a>
+      <!-- Change 41000000000 to your WhatsApp number: country code and number, digits only, no + -->
+      <a class="btn" href="https://wa.me/41000000000?text=Hello%20IB%20Watches" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
   </div>
 </section>
 
 <footer>© IB Watches · Lausanne · Istanbul</footer>
+<dialog id="enquire" aria-labelledby="enquire-title">
+  <h2 id="enquire-title">Enquire</h2>
+  <p id="enquire-watch"></p>
+  <a class="btn" id="enquire-email" href="#">Email</a>
+  <a class="btn" id="enquire-wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+  <button type="button" class="close">Close</button>
+</dialog>
+<script>
+// Enquire modal. The e-mail address and the WhatsApp number come from the buttons in the contact section.
+(function(){
+  var dlg=document.getElementById("enquire");
+  if(!dlg||typeof dlg.showModal!=="function")return; // without a modal, the link goes to the contact section
+  var mail=document.querySelector('#contact a[href^="mailto:"]'),wa=document.querySelector('#contact a[href*="wa.me"]');
+  document.addEventListener("click",function(e){
+    var a=e.target.closest("[data-enquire]");
+    if(!a)return;
+    e.preventDefault();
+    var w=a.dataset.enquire;
+    document.getElementById("enquire-watch").textContent=w;
+    document.getElementById("enquire-email").href=mail?mail.getAttribute("href").split("?")[0]+"?subject="+encodeURIComponent("Enquiry: "+w):"#contact";
+    document.getElementById("enquire-wa").href=wa?wa.getAttribute("href").split("?")[0]+"?text="+encodeURIComponent("Hello IB Watches, I am interested in the "+w+"."):"#contact";
+    dlg.showModal();
+  });
+  dlg.addEventListener("click",function(e){if(e.target===dlg||e.target.classList.contains("close"))dlg.close();});
+})();
+</script>
+<script>
+// Collection cards: click a small picture to show it large.
+document.querySelectorAll(".thumbs button").forEach(function(b){
+  b.addEventListener("click",function(){
+    var big=b.closest(".card").querySelector(".photo img");
+    if(big)big.src=b.dataset.src;
+  });
+});
+</script>
 </body>
 </html>
