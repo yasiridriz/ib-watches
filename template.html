@@ -25,7 +25,7 @@ nav a.l:hover{color:var(--fg)}
 .hero .wrap{position:relative;z-index:1;flex:1;display:grid;grid-template-columns:1fr 240px;gap:64px;align-items:end;text-align:left;max-width:1360px;padding-top:120px;padding-bottom:calc(var(--pw) * .235);width:100%}
 .latest-card{max-width:240px}
 .lt-photo{aspect-ratio:1;background:var(--card);display:grid;place-items:center;color:#9aa5a0;font-size:15px;letter-spacing:.2em;text-transform:uppercase;overflow:hidden}
-.lt-photo img{width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply}
+.lt-photo img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
 .lt-body{padding:16px 0 0}
 .lt-label{font-size:14px;color:var(--gold)}
 .lt-text{font-size:15px;color:var(--mute);margin-top:8px}
@@ -52,8 +52,7 @@ h2{font:500 clamp(34px,4.5vw,54px)/1.1 var(--font-text);margin:12px 0 20px}
 .specs span{color:var(--mute)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:28px;margin-top:48px}
 .card .photo{aspect-ratio:1;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;margin-bottom:18px;overflow:hidden;font:400 24px var(--font-text);color:var(--line)}
-.card .photo img{width:100%;height:100%;object-fit:cover}
-.thumbs{display:flex;gap:8px;margin:-6px 0 14px}.thumbs button{width:48px;height:48px;padding:0;border:1px solid var(--line);background:var(--card);cursor:pointer}.thumbs button:hover{border-color:var(--fg)}.thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.card .photo img{width:100%;height:100%;object-fit:contain}
 .enquire{display:inline-block;margin-top:12px;font-size:15px;color:var(--fg);text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--line)}.enquire:hover{color:var(--gold)}
 dialog{border:1px solid var(--line);background:#fff;color:var(--fg);padding:28px;width:min(340px,calc(100vw - 32px));margin:auto}
 dialog::backdrop{background:rgba(0,0,0,.35)}
@@ -61,6 +60,22 @@ dialog h2{font:500 20px/1.3 var(--font-text);margin:0 0 4px}
 dialog p{font-size:14px;margin:0 0 20px}
 dialog .btn{display:block;text-align:center;margin:0 0 10px}
 dialog .close{display:block;margin:6px auto 0;background:none;border:0;font:inherit;font-size:14px;color:var(--fg);text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+button.photo,button.lt-photo{width:100%;padding:0;border:1px solid var(--line);font:inherit;cursor:pointer}
+button.lt-photo{border:0}
+.title-btn{all:unset;cursor:pointer}.title-btn:hover{color:var(--gold)}.title-btn:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+#watch{padding:0;border:0;background:var(--bg);color:var(--fg);width:min(1100px,94vw);height:min(86vh,780px);margin:auto;overflow:hidden}
+#watch[open]{display:grid;grid-template-columns:1fr 1fr}
+#watch::backdrop{background:rgba(0,0,0,.45)}
+.wm-images{overflow-y:auto;background:var(--card);display:flex;flex-direction:column;gap:8px;padding:8px}
+.wm-images img{display:block;width:100%;height:auto;flex:none}
+.wm-info{padding:48px 40px 40px;display:flex;flex-direction:column;align-items:flex-start;overflow-y:auto}
+.wm-info h2{font:500 clamp(26px,2.6vw,36px)/1.2 var(--font-text);margin:0}
+.wm-info p{margin:16px 0 0;max-width:34ch}
+.wm-info .ref{font-size:14px}
+.wm-info .btn{margin-top:32px}
+.wm-close{position:absolute;top:14px;right:18px;background:none;border:0;font:inherit;font-size:15px;color:var(--fg);text-decoration:underline;text-underline-offset:4px;cursor:pointer;z-index:2}
+body:has(dialog[open]){overflow:hidden}
+@media(max-width:800px){#watch{height:92vh;overflow-y:auto}#watch[open]{display:block}.wm-images{overflow:visible}.wm-info{padding:28px 24px 36px;overflow:visible}.wm-close{position:fixed;top:calc(4vh + 10px);right:calc(3vw + 14px);background:var(--bg);padding:2px 8px}}
 .card.sold{opacity:.5}
 .meta{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
 .card h3{font:500 20px/1.3 var(--font-text);margin:4px 0 6px}
@@ -81,7 +96,7 @@ footer{padding:32px 0;background:var(--green);color:#c9ced0;font-size:13px;text-
 <header class="hero">
   <div class="wrap">
     <div>
-      <h1>A small collection of fine timepieces, sourced by hand in two cities that know time well.</h1>
+      <h1>A small collection of fine timepieces, sourced in two cities that know time well.</h1>
       <a class="btn" href="#collection">View the collection</a>
     </div>
     <!--FEATURED-->
@@ -125,6 +140,17 @@ footer{padding:32px 0;background:var(--green);color:#c9ced0;font-size:13px;text-
 </section>
 
 <footer>© IB Watches · Lausanne · Istanbul</footer>
+<dialog id="watch" aria-labelledby="wm-title">
+  <button type="button" class="wm-close">Close</button>
+  <div class="wm-images" id="wm-images"></div>
+  <div class="wm-info">
+    <h2 id="wm-title"></h2>
+    <p id="wm-desc"></p>
+    <p class="ref" id="wm-ref"></p>
+    <a class="btn" id="wm-enquire" href="#contact">Enquire</a>
+  </div>
+</dialog>
+<!--WATCHDATA-->
 <dialog id="enquire" aria-labelledby="enquire-title">
   <h2 id="enquire-title">Enquire</h2>
   <p id="enquire-watch"></p>
@@ -152,13 +178,29 @@ footer{padding:32px 0;background:var(--green);color:#c9ced0;font-size:13px;text-
 })();
 </script>
 <script>
-// Collection cards: click a small picture to show it large.
-document.querySelectorAll(".thumbs button").forEach(function(b){
-  b.addEventListener("click",function(){
-    var big=b.closest(".card").querySelector(".photo img");
-    if(big)big.src=b.dataset.src;
+// Watch modal: every picture in full, on the left half. Details on the right half.
+(function(){
+  var dlg=document.getElementById("watch"),data=document.getElementById("watch-data");
+  if(!dlg||!data||typeof dlg.showModal!=="function")return;
+  var list=JSON.parse(data.textContent);
+  document.addEventListener("click",function(e){
+    var o=e.target.closest("[data-open]");
+    if(o){
+      var w=list[+o.dataset.open];if(!w)return;
+      var name=w.brand+" "+w.name,box=document.getElementById("wm-images");
+      box.textContent="";
+      w.images.forEach(function(src){var im=document.createElement("img");im.src=src;im.alt=name;im.loading="lazy";box.appendChild(im);});
+      document.getElementById("wm-title").textContent=name;
+      document.getElementById("wm-desc").textContent=w.description||"";
+      document.getElementById("wm-ref").textContent=w.reference?"Ref. "+w.reference:"";
+      var en=document.getElementById("wm-enquire");
+      en.hidden=!!w.sold;en.dataset.enquire=name;
+      dlg.showModal();dlg.querySelector(".wm-images").scrollTop=0;dlg.scrollTop=0;
+      return;
+    }
+    if(e.target===dlg||e.target.classList.contains("wm-close"))dlg.close();
   });
-});
+})();
 </script>
 </body>
 </html>

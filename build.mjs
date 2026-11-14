@@ -13,11 +13,10 @@ const watches = readdirSync(dir).filter(f => f.endsWith(".json") || f.endsWith("
 // Pictures: the CMS list "images". The first picture is the header picture. The old single "image" field still works.
 const url = p => { try { return encodeURI(decodeURI(p)); } catch { return p; } }; // file names with spaces, for example "WhatsApp Image (1).jpeg"
 const pics = w => (Array.isArray(w.images) && w.images.length ? w.images : (w.image ? [w.image] : [])).map(url);
-const card = w => `
+const card = (w, i) => `
   <article class="card${w.available === false ? " sold" : ""}">
-    <div class="photo">${pics(w).length ? `<img src="${esc(pics(w)[0])}" alt="${esc(w.brand)} ${esc(w.name)}" loading="lazy">` : `<span>${esc(w.brand)}</span>`}</div>
-    ${pics(w).length > 1 ? `<div class="thumbs">${pics(w).map(p => `<button type="button" data-src="${esc(p)}" aria-label="Show picture"><img src="${esc(p)}" alt="" loading="lazy"></button>`).join("")}</div>` : ""}
-    <h3>${esc(w.brand)} ${esc(w.name)}</h3>
+    <button type="button" class="photo" data-open="${i}" aria-label="View ${esc(w.brand)} ${esc(w.name)}">${pics(w).length ? `<img src="${esc(pics(w)[0])}" alt="" loading="lazy">` : `<span>${esc(w.brand)}</span>`}</button>
+    <h3><button type="button" class="title-btn" data-open="${i}">${esc(w.brand)} ${esc(w.name)}</button></h3>
     <p>${esc(w.description)}</p>
     ${w.available === false ? `<p class="price">Sold</p>` : `<a class="enquire" href="#contact" data-enquire="${esc(w.brand)} ${esc(w.name)}">Enquire</a>`}
   </article>`;
@@ -27,7 +26,7 @@ const live = watches.filter(w => w.available !== false);
 const feat = live.find(w => w.featured) || live[0];
 const template = readFileSync("template.html", "utf8");
 const featured = !feat ? "" : `<aside class="latest-card" aria-label="Latest arrival">
-      <div class="lt-photo">${pics(feat).length ? `<img src="${esc(pics(feat)[0])}" alt="${esc(feat.brand)} ${esc(feat.name)}">` : esc(feat.brand)}</div>
+      <button type="button" class="lt-photo" data-open="${watches.indexOf(feat)}" aria-label="View ${esc(feat.brand)} ${esc(feat.name)}">${pics(feat).length ? `<img src="${esc(pics(feat)[0])}" alt="">` : esc(feat.brand)}</button>
       <div class="lt-body">
         <p class="lt-label">Latest arrival</p>
         <h3>${esc(feat.brand)} ${esc(feat.name)}</h3>
@@ -35,7 +34,8 @@ const featured = !feat ? "" : `<aside class="latest-card" aria-label="Latest arr
         <div class="lt-foot"><a href="#contact" data-enquire="${esc(feat.brand)} ${esc(feat.name)}">Enquire</a><a href="#collection">See all</a></div>
       </div>
     </aside>`;
-const html = template.replace("<!--WATCHES-->", watches.map(card).join("\n")).replace("<!--FEATURED-->", featured);
+const html = template.replace("<!--WATCHES-->", watches.map(card).join("\n")).replace("<!--FEATURED-->", featured)
+  .replace("<!--WATCHDATA-->", `<script type="application/json" id="watch-data">${JSON.stringify(watches.map(w => ({ brand: w.brand, name: w.name, description: w.description, reference: w.reference, sold: w.available === false, images: pics(w) }))).replace(/</g, "\\u003c")}</script>`);
 if (existsSync("dist")) rmSync("dist", { recursive: true });
 mkdirSync("dist");
 writeFileSync("dist/index.html", html);
